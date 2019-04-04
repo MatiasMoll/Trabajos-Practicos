@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1554338604 source:c:\users\m&n\desktop\mati uni\programacion i\tp01\main.c
+	<stdio.h>
+	<stdlib.h>
+	"calculadora.h"
+
+1554254165 source:c:\users\m&n\desktop\mati uni\programacion i\tp01\calculadora.c
+
+1554339304 c:\users\m&n\desktop\mati uni\programacion i\tp01\calculadora.h
+
