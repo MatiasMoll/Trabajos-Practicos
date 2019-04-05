@@ -4,7 +4,7 @@
 
 int main()
 {
-    calculadoras();
+    calculadora();
     return 0;
 }
 

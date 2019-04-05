@@ -1,12 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "calculadora.h"
+
 int calculadora()
 {
     float numeroUno;
     float numeroDos;
+    int eleccionUsuario;
     int eleccion;
-
-    ingresoOperandos(&numeroUno, &numeroDos);
-    menuOperacion(numeroUno, numeroDos,&eleccion);//Elige la opcion deseada, y se la pasa al switch como parametro
-    operaciones(numeroUno, numeroDos, eleccion);
+    do{
+        ingresoOperandos(&numeroUno, &numeroDos);
+        menuOperacion(numeroUno, numeroDos,&eleccion);//Elige la opcion deseada, y se la pasa al switch como parametro
+        operaciones(numeroUno, numeroDos, eleccion);
+        printf("\n Desea continuar operando (Debera ingresar nuevamente los numeros)? \n 1-SI \n 2-NO ");
+        scanf("%d",&eleccionUsuario);
+    }while(eleccionUsuario == 1);
     return 0;
 }
 int ingresoOperandos(float *numeroUno, float *numeroDos)
@@ -14,13 +22,21 @@ int ingresoOperandos(float *numeroUno, float *numeroDos)
     float primerNumero;
     float segundoNumero;
 
-    printf("Ingrese el primer operando: ");
-    scanf("%f",&primerNumero);
-    printf("Ingrese el segundo operando: ");
-    scanf("%f",&segundoNumero);
+    if(numeroUno != NULL && numeroDos != NULL)
+    {
+        printf("Ingrese el primer operando: ");
+        scanf("%f",&primerNumero);
+        printf("Ingrese el segundo operando: ");
+        scanf("%f",&segundoNumero);
 
-    *numeroUno = primerNumero;
-    *numeroDos = segundoNumero;
+        *numeroUno = primerNumero;
+        *numeroDos = segundoNumero;
+    }else
+        {
+            printf("ERROR, ingrese un numero");
+        }
+
+
 
     return 0;
 }
@@ -34,8 +50,8 @@ int menuOperacion(float numeroUno, float numeroDos, int *eleccion)
     printf("2-RESTA.(%.2f - %.2f)\n", numeroUno, numeroDos);
     printf("3-MULTIPLICACION.(%.2f * %.2f)\n", numeroUno, numeroDos);
     printf("4-DIVISION.(%.2f / %.2f)\n", numeroUno, numeroDos);
-    printf("5-FACTORIAL DEL PRIMER NUMERO.(%.2f!)\n", numeroUno);
-    printf("6-REALIZAR TODAS LAS OPERACIONES ANTERIORES \n", numeroUno);
+    printf("5-FACTORIAL DEL PRIMER NUMERO.(%.2f!)(PRESICION ASEGURADA CON NUMEROS MENORES A 13)\n", numeroUno);
+    printf("6-REALIZAR TODAS LAS OPERACIONES ANTERIORES \n");
     printf("7-SALIR \n");
 
     scanf("%d",&operacionElegida);
@@ -126,30 +142,31 @@ int division(float numeroUno, float numeroDos)
 
      return retorno;
 }
-int factorial(int numeroUno)
+int factorial(float numeroUno)
 {
     int retorno=-1;
+    int numeroUnoINT=(int)numeroUno;
     long resultado;
-    if(numeroUno<0)
+    if(numeroUnoINT<0)
     {
         printf("No se puede calcular el factorial de un numero negativo \n");
     }else
          {
-             if(numeroUno==0)
+             if(numeroUnoINT==0)
              {
                  resultado = 1;
                  retorno = 0;
              }else
                 {
-                    int aux = numeroUno;
-                    resultado = numeroUno;
+                    int aux = numeroUnoINT;
+                    resultado = numeroUnoINT;
                     do{
                         aux --;
                         resultado*=aux;
                     }while(aux>1);
                     retorno = 0;
                 }
-        printf("El factorial de %d es %ld", numeroUno, resultado);
+        printf("\n El factorial de %d es %ld",numeroUnoINT, resultado);
         }
     return retorno;
 }
